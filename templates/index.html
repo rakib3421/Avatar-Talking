@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Avatar Chat</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="conversation-wrapper">
+    <div class="avatar-block left">
+      <video id="user-video" class="avatar-video" src="/static/video1.mp4" autoplay muted loop></video>
+      <div class="chat-bubble left-bubble" id="bubble-alice"></div>
+    </div>
+
+    <div class="avatar-block right">
+      <video id="ai-video" class="avatar-video" src="/static/video2.mp4" autoplay muted loop></video>
+      <div class="chat-bubble right-bubble" id="bubble-nora"></div>
+    </div>
+  </div>
+
+  <div class="input-box">
+    <input type="text" id="chat-input" placeholder="Say something..." />
+    <button id="mic-btn">🎤</button>
+    <button id="send-btn">Send</button>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>

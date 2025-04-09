@@ -1,0 +1,111 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #f9eaff, #ffffff);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.conversation-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  padding: 40px 60px;
+}
+
+.avatar-block {
+  position: relative;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-video {
+  width: 100%;
+  height: 300px;
+  border-radius: 20px;
+  object-fit: contain;
+  display: block; /* always shown */
+  background-color: #eee;
+}
+
+.chat-bubble {
+  position: absolute;
+  top: 30%;
+  min-height: 50px;
+  max-width: 260px;
+  padding: 12px 18px;
+  border-radius: 18px;
+  font-size: 17px;
+  font-style: italic;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  background-color: #f1f1f1;
+}
+
+.left-bubble {
+  background-color: #d0f0c0;
+  left: 100%;
+  margin-left: 40px;
+}
+
+.left-bubble::after {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 10px;
+  border: 10px solid transparent;
+  border-right-color: #d0f0c0;
+}
+
+.right-bubble {
+  background-color: #cce0ff;
+  right: 100%;
+  margin-right: 40px;
+}
+
+.right-bubble::after {
+  content: "";
+  position: absolute;
+  right: -10px;
+  top: 10px;
+  border: 10px solid transparent;
+  border-left-color: #cce0ff;
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 30px;
+  gap: 10px;
+  background: #fff;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+}
+
+#chat-input {
+  flex: 1;
+  padding: 14px 20px;
+  border-radius: 30px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  max-width: 800px;
+}
+
+#mic-btn, #send-btn {
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #7b2cbf;
+  color: white;
+  font-weight: bold;
+}
+
+#mic-btn:hover, #send-btn:hover {
+  background-color: #5a189a;
+}
