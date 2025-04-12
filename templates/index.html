@@ -7,19 +7,45 @@
   <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
+  <div class="avatar-selectors">
+    <label>Choose User Charecter
+      <select id="user-avatar-select">
+        <option value="/static/boy1.mp4">BOY 1</option>
+        <option value="/static/boy2.mp4">BOY 2</option>
+        <option value="/static/boy3.mp4">BOY 3</option>
+      </select>
+    </label>
+
+    <label>Choose Your Partner
+      <select id="ai-avatar-select">
+        <option value="/static/girl1.mp4">GIRL 1</option>
+        <option value="/static/girl2.mp4">GIRL 2</option>
+        <option value="/static/girl3.mp4">GIRL 3</option>
+      </select>
+    </label>
+  </div>
+
   <div class="conversation-wrapper">
     <div class="avatar-block left">
-      <video id="user-video" class="avatar-video" src="/static/video1.mp4" autoplay muted loop></video>
+      <video id="user-video" class="avatar-video" muted playsinline></video>
       <div class="chat-bubble left-bubble" id="bubble-alice"></div>
     </div>
 
     <div class="avatar-block right">
-      <video id="ai-video" class="avatar-video" src="/static/video2.mp4" autoplay muted loop></video>
+      <video id="ai-video" class="avatar-video" muted playsinline></video>
       <div class="chat-bubble right-bubble" id="bubble-nora"></div>
     </div>
   </div>
 
   <div class="input-box">
+    <select id="personality-select">
+      <option value="friendly">Friendly</option>
+      <option value="funny">Funny</option>
+      <option value="flirty">Flirty</option>
+      <option value="wise">Wise</option>
+      <option value="formal">Formal</option>
+    </select>
+
     <input type="text" id="chat-input" placeholder="Say something..." />
     <button id="mic-btn">🎤</button>
     <button id="send-btn">Send</button>
