@@ -9,8 +9,6 @@ const noraBubble = document.getElementById("bubble-nora");
 const userVideo = document.getElementById("user-video");
 const aiVideo = document.getElementById("ai-video");
 
-
-
 let recognition;
 
 function playVideo(videoEl) {
