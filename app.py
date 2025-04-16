@@ -42,21 +42,18 @@ def generate_elevenlabs_audio(text, voice_id, filename):
         "text": text,
         "model_id": "eleven_multilingual_v2",
         "voice_settings": {
-            "stability": 0.75,
-            "similarity_boost": 0.9
+            "stability": 0.5,
+            "similarity_boost": 0.7
         }
     }
 
-    for attempt in range(2):  # Try twice
-        response = requests.post(url, headers=headers, json=payload)
-        if response.status_code == 200:
-            with open(filename, "wb") as f:
-                f.write(response.content)
-            return
-        else:
-            print(f"[WARN] ElevenLabs failed, attempt {attempt + 1}, status: {response.status_code}")
-
-    raise Exception("ElevenLabs audio generation failed.")
+    response = requests.post(url, headers=headers, json=payload)
+    if response.status_code == 200:
+        with open(filename, "wb") as f:
+            f.write(response.content)
+    else:
+        print(f"Error: ElevenLabs API returned {response.status_code}")
+        raise Exception("Failed to generate audio")
 
 # Route for frontend
 @app.route("/")
@@ -84,18 +81,15 @@ def speak():
     personality = personality_prompts.get(mode, personality_prompts["friendly"])
 
     # Prompt for Gemini
-    prompt = f"""
-    Forget you're an AI. You're a real person chatting with someone you know well.
-    Tone: {personality}
-    Rules:
-    - Avoid sounding robotic or assistant-like.
-    - Do not use emojis or overly formal phrases.
-    - Keep it under 2-3 sentences max.
-    - Use natural speech patterns (e.g., “kinda”, “yeah”, “gotcha” if appropriate).
+    prompt = (
+        f"You are not an assistant. You're a cool, casual human friend. "
+        f"Speak naturally like texting. No emojis. Be fun or relaxed, based on the mode.\n\n"
+        f"{personality}\n\n"
+        f"Here's what they just said:\n"
+        f"{user_text}\n\n"
+        f"Reply casually, as if you're continuing a real convo."
+    )
 
-    Conversation so far:
-    Them: {user_text}
-    You:"""
     # Generate AI reply using Gemini
     model = genai.GenerativeModel("gemini-2.0-flash")
     response = model.generate_content(prompt)
@@ -121,28 +115,6 @@ def speak():
         "reply": ai_reply,
         "user_audio_url": "/" + user_audio_filename,
         "ai_audio_url": "/" + ai_audio_filename
-    })
-
-@app.route("/audio-only", methods=["POST"])
-def audio_only():
-    data = request.json
-    text = data.get("text")
-    speaker = data.get("speaker", "user")
-    if not text:
-        return jsonify({"error": "No text provided."}), 400
-
-    audio_id = uuid.uuid4().hex
-    filename = f"static/audio/{speaker}_{audio_id}.mp3"
-    voice_id = USER_VOICE_ID if speaker == "user" else AI_VOICE_ID
-
-    try:
-        generate_elevenlabs_audio(text, voice_id, filename)
-    except Exception as e:
-        from gtts import gTTS
-        gTTS(text).save(filename)
-
-    return jsonify({
-        "audio_url": "/" + filename
     })
 
 # Make sure audio folder exists and run app

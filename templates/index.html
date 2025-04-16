@@ -7,62 +7,47 @@
   <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
-  <section class="main-container">
-    <div class="avatar-selectors">
-      <label>Choose User Character
-        <select id="user-avatar-select">
-          <option value="/static/boy3.mp4">BERAT</option>
-          <option value="/static/boy4.mp4">TEODOR</option>
-        </select>
-      </label>
-
-      <label>Choose Your Partner
-        <select id="ai-avatar-select">
-          <option value="/static/girl2.mp4">CARLOTTA</option>
-          <option value="/static/girl3.mp4">TUBA</option>
-        </select>
-      </label>
-    </div>
-
-    <div class="conversation-wrapper">
-      <div class="avatar-block left">
-        <video id="user-video" class="avatar-video" muted playsinline></video>
-      </div>
-
-      <div class="chat-history" id="chat-history"></div>
-
-      <div class="avatar-block right">
-        <video id="ai-video" class="avatar-video" muted playsinline></video>
-      </div>
-    </div>
-
-    <div class="input-section">
-      <div class="input-box">
-        <input type="text" id="user-input" placeholder="User says..." />
-        <button id="user-mic-btn">🎤</button>
-        <button id="user-send-btn">Send</button>
-      </div>
-
-      <select id="personality-select">
-        <option value="friendly">Friendly</option>
-        <option value="funny">Funny</option>
-        <option value="flirty">Flirty</option>
-        <option value="wise">Wise</option>
-        <option value="formal">Formal</option>
+  <div class="avatar-selectors">
+    <label>Choose User Charecter
+      <select id="user-avatar-select">
+        <option value="/static/boy3.mp4">BERAT</option>
+        <option value="/static/boy4.mp4">TEODOR</option>
       </select>
+    </label>
 
-      <select id="ai-reply-from">
-        <option value="ai">Reply as AI</option>
-        <option value="user">Reply as USER</option>
+    <label>Choose Your Partner
+      <select id="ai-avatar-select">
+        <option value="/static/girl2.mp4">CARLOTTA</option>
+        <option value="/static/girl3.mp4">TUBA</option>
       </select>
+    </label>
+  </div>
 
-      <div class="input-box">
-        <input type="text" id="ai-input" placeholder="AI says..." />
-        <button id="ai-mic-btn">🎤</button>
-        <button id="ai-send-btn">Send</button>
-      </div>
+  <div class="conversation-wrapper">
+    <div class="avatar-block left">
+      <video id="user-video" class="avatar-video" muted playsinline></video>
+      <div class="chat-bubble left-bubble" id="bubble-alice"></div>
     </div>
-  </section>
+
+    <div class="avatar-block right">
+      <video id="ai-video" class="avatar-video" muted playsinline></video>
+      <div class="chat-bubble right-bubble" id="bubble-nora"></div>
+    </div>
+  </div>
+
+  <div class="input-box">
+    <select id="personality-select">
+      <option value="friendly">Friendly</option>
+      <option value="funny">Funny</option>
+      <option value="flirty">Flirty</option>
+      <option value="wise">Wise</option>
+      <option value="formal">Formal</option>
+    </select>
+
+    <input type="text" id="chat-input" placeholder="Say something..." />
+    <button id="mic-btn">🎤</button>
+    <button id="send-btn">Send</button>
+  </div>
 
   <script src="/static/script.js"></script>
 </body>
